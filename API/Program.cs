@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 //register DI from other class library
 DependencyInjection.RegisterContractDependencyInjection(builder.Services);
 
@@ -21,27 +22,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
-
-//namespace API
-//{
-//    public class Program
-//    {
-//        public static void Main(string[] args)
-//        {
-//            var host = CreateHostBuilder(args).Build();
-//            host.Run();
-//        }
-
-//        public static IHostBuilder CreateHostBuilder(string[] args)
-//        { 
-
-//        }
-//    }
-
-//}
